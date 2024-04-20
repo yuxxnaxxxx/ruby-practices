@@ -27,7 +27,7 @@ class Calendar
     end
   end
 
-  def print_calendar
+  def show
     valid_year
     valid_month
 
@@ -68,4 +68,4 @@ year = params[:year] || current_day.year
 month = params[:month] || current_day.month
 
 calendar = Calendar.new(year, month, current_day)
-calendar.print_calendar
+calendar.show
