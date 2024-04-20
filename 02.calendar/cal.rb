@@ -10,7 +10,7 @@ class Calendar
   end
 
   def include_today?
-    return true if @year === @day.year && @month === @day.month
+    @year == @day.year && @month == @day.month
   end
 
   def valid_month
@@ -42,9 +42,9 @@ class Calendar
 
     puts "#{month_name} #{@year}".center(20)
     puts "Su Mo Tu We Th Fr Sa"
-    print blank if first_day_weekday != 0
+    print blank
     (first_day..last_day).each do |date|
-      if include_today? === true && date.day == @day.day
+      if include_today? == true && date.day == @day.day
         printf("\e[7m%2s\e[0m", date.day)
         print " "
       else
