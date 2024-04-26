@@ -6,11 +6,7 @@ class Calendar
   def initialize(year, month, current_day)
     @year = year
     @month = month
-    @day = current_day
-  end
-
-  def include_today?
-    @year == @day.year && @month == @day.month
+    @current_day = current_day
   end
 
   def valid_month
@@ -44,7 +40,7 @@ class Calendar
     puts "Su Mo Tu We Th Fr Sa"
     print blank
     (first_day..last_day).each do |date|
-      if include_today? == true && date.day == @day.day
+      if date == @current_day
         printf("\e[7m%2s\e[0m", date.day)
         print " "
       else
