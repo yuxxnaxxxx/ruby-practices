@@ -9,23 +9,9 @@ class Calendar
     @current_day = current_day
   end
 
-  def valid_month
-    if @month.nil? || @month < 1 || @month > 12
-      puts "cal: #{@month} is neither a month number (1..12) nor a name"
-      exit()
-    end
-  end
-  
-  def valid_year
-    if @year.nil? || @year <= 0
-      puts "cal: year '#{@year}' not in range 1..9999"
-      exit()
-    end
-  end
-
   def show
-    valid_year
-    valid_month
+    return puts "cal: year '#{@year}' not in range 1..9999" if valid_year
+    return puts "cal: #{@month} is neither a month number (1..12) nor a name" if valid_month
 
     first_day = Date.new(@year, @month, 1)
     last_day = Date.new(@year, @month, -1)
@@ -50,6 +36,16 @@ class Calendar
       print "\n" if date.wday == 6
     end
     puts ""
+  end
+
+  private
+
+  def valid_month
+    @month.nil? || @month < 1 || @month > 12
+  end
+
+  def valid_year
+    @year.nil? || @year <= 0 || @year > 9999
   end
 end
 
