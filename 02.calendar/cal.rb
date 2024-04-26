@@ -13,19 +13,19 @@ class Calendar
     return puts "cal: year '#{@year}' not in range 1..9999" if valid_year
     return puts "cal: #{@month} is neither a month number (1..12) nor a name" if valid_month
 
-    first_day = Date.new(@year, @month, 1)
-    last_day = Date.new(@year, @month, -1)
+    first_date = Date.new(@year, @month, 1)
+    last_date = Date.new(@year, @month, -1)
 
     time = Time.new(@year, @month)
     month_name = time.strftime("%B")
     
-    first_day_weekday = first_day.wday
+    first_day_weekday = first_date.wday
     blank =  "   " * first_day_weekday
 
     puts "#{month_name} #{@year}".center(20)
     puts "Su Mo Tu We Th Fr Sa"
     print blank
-    (first_day..last_day).each do |date|
+    (first_date..last_date).each do |date|
       if date == @current_day
         printf("\e[7m%2s\e[0m", date.day)
         print " "
