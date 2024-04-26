@@ -33,9 +33,9 @@ class Calendar
         printf("%2s", date.day)
         print " "
       end
-      print "\n" if date.wday == 6
+      print "\n" if date.saturday?
     end
-    puts ""
+    print "\n"
   end
 
   private
