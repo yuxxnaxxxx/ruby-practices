@@ -10,8 +10,8 @@ class Calendar
   end
 
   def show
-    return puts "cal: year '#{@year}' not in range 1..9999" if valid_year
-    return puts "cal: #{@month} is neither a month number (1..12) nor a name" if valid_month
+    return puts "cal: year '#{@year}' not in range 1..9999" if valid_year?
+    return puts "cal: #{@month} is neither a month number (1..12) nor a name" if valid_month?
 
     first_date = Date.new(@year, @month, 1)
     last_date = Date.new(@year, @month, -1)
@@ -40,11 +40,11 @@ class Calendar
 
   private
 
-  def valid_month
+  def valid_month?
     @month.nil? || @month < 1 || @month > 12
   end
 
-  def valid_year
+  def valid_year?
     @year.nil? || @year <= 0 || @year > 9999
   end
 end
