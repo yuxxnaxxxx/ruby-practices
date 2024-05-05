@@ -22,17 +22,20 @@ shots.each_slice(2) do |shot|
 end
 
 point = 0
+
 frames.each_with_index do |frame, index|
-  point += if frame[0] == 10
-             if index >= 9
-               10
-             elsif frames[index + 1][0] == 10
-               10 + frames[index + 1][0] + frames[index + 2][0]
+  point += if index < 9
+             if frame[0] == 10
+               if frames[index + 1][0] == 10
+                 10 + frames[index + 1][0] + frames[index + 2][0]
+               else
+                 10 + frames[index + 1].sum
+               end
+             elsif frames[index].sum == 10
+               frames[index].sum + frames[index + 1][0]
              else
-               10 + (frames[index + 1]).sum
+               frames[index].sum
              end
-           elsif index < 9 && frames[index].sum == 10
-             frames[index].sum + frames[index + 1][0]
            else
              frames[index].sum
            end
