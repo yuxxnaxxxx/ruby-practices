@@ -27,7 +27,7 @@ frames.each_with_index do |frame, index|
              if index >= 9
                10
              elsif frames[index + 1][0] == 10
-               0 + frames[index + 1][0] + frames[index + 2][0]
+               10 + frames[index + 1][0] + frames[index + 2][0]
              else
                10 + (frames[index + 1]).sum
              end
