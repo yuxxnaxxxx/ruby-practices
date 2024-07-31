@@ -6,13 +6,13 @@ COLUMN_WIDTH = 8
 DEFAULT_COLUMN = 3
 
 def get_filenames(include_hidden: false)
-  all_files = Dir.entries('.')
-  files = if include_hidden
-            all_files
-          else
-            all_files.reject { |file| file.start_with?('.') }
-          end
-  files.sort
+  all_filenames = Dir.entries('.')
+  filenames = if include_hidden
+                all_filenames
+              else
+                all_filenames.reject { |filename| filename.start_with?('.') }
+              end
+  filenames.sort
 end
 
 def get_max_filename_length(filenames)
@@ -21,18 +21,18 @@ def get_max_filename_length(filenames)
   filenames.map(&:size).max
 end
 
-def convert_file_order(files, columns = DEFAULT_COLUMN)
-  file_count = files.count.to_f
+def reorder_filenames(filenames, columns = DEFAULT_COLUMN)
+  file_count = filenames.count.to_f
   rows = (file_count / columns).ceil
 
-  ordered_files = []
-  rows.times { ordered_files << [] }
+  ordered_filenames = []
+  rows.times { ordered_filenames << [] }
 
-  files.each_with_index do |file, i|
-    ordered_files[i % rows] << file
+  filenames.each_with_index do |filename, i|
+    ordered_filenames[i % rows] << filename
   end
 
-  ordered_files
+  ordered_filenames
 end
 
 def get_column_width(max_filename_length)
@@ -45,18 +45,18 @@ def get_column_width(max_filename_length)
   end
 end
 
-def output_file_name(files, columns = DEFAULT_COLUMN)
-  max_filename_length = get_max_filename_length(files)
+def output_filenames(filenames, columns = DEFAULT_COLUMN)
+  max_filename_length = get_max_filename_length(filenames)
   width = get_column_width(max_filename_length)
-  ordered_files_result = convert_file_order(files, columns)
+  grouped_filenames = reorder_filenames(filenames, columns)
 
-  ordered_files_result.each do |file|
-    file.each do |name|
-      print name.ljust(width, ' ')
+  grouped_filenames.each do |file_group|
+    file_group.each do |filename|
+      print filename.ljust(width, ' ')
     end
     puts
   end
 end
 
-files = get_filenames
-output_file_name(files, DEFAULT_COLUMN)
+filenames = get_filenames
+output_filenames(filenames, DEFAULT_COLUMN)
